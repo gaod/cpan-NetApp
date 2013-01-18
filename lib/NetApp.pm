@@ -1,6 +1,10 @@
 
 package NetApp;
 
+#
+# Until we convert to distzilla one of these days, when incrementing
+# this version, it must be done in ALL of the pm files.
+#
 our $VERSION = '500.002';
 $VERSION = eval $VERSION;  ##  no critic: StringyEval
 
