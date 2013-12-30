@@ -8,6 +8,7 @@ use strict;
 use warnings;
 use English;
 use Carp;
+use DateTime;
 
 use Class::Std;
 use Params::Validate qw( :all );
@@ -243,6 +244,7 @@ sub _create_snapshot {
     my (%args)		= validate( @_, {
         parent		=> { type	=> OBJECT },
         name		=> { type	=> SCALAR },
+        snapname	=> { default    => DateTime->now() },
     });
 
     my $parent		= $args{parent};
@@ -253,7 +255,7 @@ sub _create_snapshot {
         push @command, '-A';
     }
 
-    push @command, $args{name};
+    push @command, $args{name}, $args{snapname};
 
     return $parent->get_filer->_run_command(
         command		=> \@command,
